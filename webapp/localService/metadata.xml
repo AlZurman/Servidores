@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="ZOS_ACADEMIA_BRAIAN_SRV" xml:lang="es" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="Servidores" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="NombreServer"/>
+                </Key>
+                <Property Name="NombreServer" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Nombre del server" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Region" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Region" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TipoServer" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Tipo de server" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Estado" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Estado" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CantUsuarios" Type="Edm.Int16" Nullable="false" sap:unicode="false" sap:label="Cantidad de usuarios" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <NavigationProperty Name="To_Usuarios" Relationship="ZOS_ACADEMIA_BRAIAN_SRV.Servidores_Usuarios" FromRole="FromRole_Servidores_Usuarios" ToRole="ToRole_Servidores_Usuarios"/>
+            </EntityType>
+            <EntityType Name="Usuarios" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="NombreServer"/>
+                    <PropertyRef Name="NombreUser"/>
+                </Key>
+                <Property Name="NombreServer" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Nombre de server" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="NombreUser" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Nombre de usuario" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TipoUser" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Tipo de usuario" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Region" Type="Edm.String" Nullable="false" sap:unicode="false" sap:label="Region" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Nivel" Type="Edm.Int16" Nullable="false" sap:unicode="false" sap:label="Nivel" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <Association Name="Servidores_Usuarios" sap:content-version="1">
+                <End Type="ZOS_ACADEMIA_BRAIAN_SRV.Servidores" Multiplicity="1" Role="FromRole_Servidores_Usuarios"/>
+                <End Type="ZOS_ACADEMIA_BRAIAN_SRV.Usuarios" Multiplicity="*" Role="ToRole_Servidores_Usuarios"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_Servidores_Usuarios">
+                        <PropertyRef Name="NombreServer"/>
+                    </Principal>
+                    <Dependent Role="ToRole_Servidores_Usuarios">
+                        <PropertyRef Name="NombreServer"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <EntityContainer Name="ZOS_ACADEMIA_BRAIAN_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="ServidoresSet" EntityType="ZOS_ACADEMIA_BRAIAN_SRV.Servidores" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+                <EntitySet Name="UsuariosSet" EntityType="ZOS_ACADEMIA_BRAIAN_SRV.Usuarios" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <AssociationSet Name="Servidores_UsuariosSet" Association="ZOS_ACADEMIA_BRAIAN_SRV.Servidores_Usuarios" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ServidoresSet" Role="FromRole_Servidores_Usuarios"/>
+                    <End EntitySet="UsuariosSet" Role="ToRole_Servidores_Usuarios"/>
+                </AssociationSet>
+            </EntityContainer>
+            <atom:link rel="self" href="http://stks4hpil.eastus2.cloudapp.azure.com:8002/sap/opu/odata/sap/ZOS_ACADEMIA_BRAIAN_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="http://stks4hpil.eastus2.cloudapp.azure.com:8002/sap/opu/odata/sap/ZOS_ACADEMIA_BRAIAN_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

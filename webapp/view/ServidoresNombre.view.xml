@@ -1,0 +1,46 @@
+<mvc:View controllerName="academia2022.zservidores.controller.ServidoresNombre"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+    
+    <Page id="page" title="{i18n>title}" showHeader="false"> 
+        <content>
+
+	<Table id="idTablaServers"
+		items="{/ServidoresSet}">
+
+		<columns>
+			<Column>
+				<Text text="{i18n>NombreServer}" />
+			</Column>
+            <Column>
+				<Text text="{i18n>TipoServer}" />
+			</Column>
+            <Column>
+				<Text text="{i18n>CantUsuarios}" />
+			</Column>
+            <Column>
+				<Text text="{i18n>Estado}" />
+			</Column>
+		</columns>
+		<items>
+			<ColumnListItem vAlign="Middle">
+				<cells>
+					<ObjectIdentifier
+						title="{NombreServer}"/>
+					<Text
+						text="{TipoServer}" />
+                     <Text
+						text="{CantUsuarios}" />
+                    <Text
+						text="{Estado}" />
+                         
+                        
+				</cells>
+			</ColumnListItem>
+		</items>
+	</Table>
+
+
+        </content>
+    </Page>
+</mvc:View>

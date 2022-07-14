@@ -1,0 +1,29 @@
+<mvc:View controllerName="academia2022.zservidores.controller.Servidores"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+
+    <Page id="page"  title="{i18n>titleRegiones}" showHeader="true"    > 
+          
+        <content>
+
+<HBox>
+
+	<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Servidores de la región argentina"
+		frameType="OneByOne" press="press">
+		<TileContent  footer="Argentina">
+			<ImageContent  src="../controller/Flags/Argentina.png" />
+		</TileContent>
+	</GenericTile>
+
+	<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Servidores de la región brasilera"
+		frameType="OneByOne" press="press">
+		<TileContent  footer="Brasil">
+			<ImageContent  src="../controller/Flags/Brasil.png" />
+		</TileContent>
+	</GenericTile>
+
+</HBox>
+
+        </content>
+    </Page>
+</mvc:View>
