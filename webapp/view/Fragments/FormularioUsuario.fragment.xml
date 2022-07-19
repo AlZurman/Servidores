@@ -1,0 +1,49 @@
+<core:FragmentDefinition 
+    xmlns="sap.m" 
+    xmlns:core="sap.ui.core" 
+    xmlns:mvc="sap.ui.core.mvc" 
+    xmlns:html="http://www.w3.org/1999/xhtml"
+    xmlns:l="sap.ui.layout" 
+    xmlns:f="sap.ui.layout.form"
+    xmlns:tnt="sap.tnt" 
+    xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+
+
+        <Dialog title="Nuevo Usuario">
+
+        <HBox justifyContent="SpaceBetween" class="sapUiTinyMarginTopBottom sapUiSmallMarginBeginEnd">
+            <Label text="Usuario"/>
+         <Input fieldGroupIds="Address" value="{AddressStreet}" id="idUsuario"></Input>
+        </HBox>
+
+        
+        <HBox justifyContent="SpaceBetween" class="sapUiTinyMarginTopBottom sapUiSmallMarginBeginEnd">
+            <Label text="Tipo"/>
+            <Input fieldGroupIds="Address" value="{AddressStreetNumber}" id="idTipo"></Input>
+        </HBox>
+
+
+        <HBox justifyContent="SpaceBetween" class="sapUiTinyMarginTopBottom sapUiSmallMarginBeginEnd">
+	        <Label text="Tipo"/>
+            <Select id="Tipo" fieldGroupIds="Adress" selectedKey="{Tipo}">
+					<items>
+						<core:Item text="Jugador" key="Jugador"/>
+						<core:Item text="Moderador" key="Moderador"/>
+					</items>
+				</Select>
+        </HBox>
+        
+        <HBox class="sapUiTinyMarginTopBottom sapUiSmallMarginBeginEnd">
+         <Label text="Nivel"/>
+        		<Slider showAdvancedTooltip="true" inputsAsTooltips="true" value="1" width="200%"
+			min="1" max="100" enabled="{false}" class="sapUiTinyMarginBegin sapUiTinyMarginTopBottom" />
+        </HBox>
+
+        <beginButton>
+            <Button type="Accept" text="Crear" press=".onCrearUsuario"/>
+        </beginButton>
+        <endButton>
+            <Button type="Reject" text="Cancelar" press="onCancelar"/>
+        </endButton>
+        </Dialog>
+</core:FragmentDefinition>

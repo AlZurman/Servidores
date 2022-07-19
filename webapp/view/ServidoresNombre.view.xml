@@ -6,7 +6,7 @@
         <content>
 
 	<Table id="idTablaServers"
-		items="{/ServidoresSet}">
+		items="{modeloLocalServidores>/}">
 
 		<columns>
 			<Column>
@@ -23,23 +23,21 @@
 			</Column>
 		</columns>
 		<items>
-			<ColumnListItem vAlign="Middle">
+			<ColumnListItem vAlign="Middle" type="Navigation" press='onVerUsuarios'>
 				<cells>
 					<ObjectIdentifier
-						title="{NombreServer}"/>
+						title="{modeloLocalServidores>NombreServer}"/>
 					<Text
-						text="{TipoServer}" />
+						text="{modeloLocalServidores>TipoServer}" />
                      <Text
-						text="{CantUsuarios}" />
+						text="{modeloLocalServidores>CantUsuarios}" />
                     <Text
-						text="{Estado}" />
-                         
-                        
+						text="{modeloLocalServidores>Estado}" />
+                                                 
 				</cells>
 			</ColumnListItem>
 		</items>
 	</Table>
-
 
         </content>
     </Page>

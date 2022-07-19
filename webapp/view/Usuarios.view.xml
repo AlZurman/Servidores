@@ -1,0 +1,58 @@
+<mvc:View
+	controllerName="academia2022.zservidores.controller.Usuarios"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core"
+	xmlns="sap.m">
+	<Table id="tablaUsuarios"
+		items="{modeloLocalUsuarios>/}">
+		<headerToolbar>
+			<OverflowToolbar>
+				<Title text="Products" level="H2"/>
+				<ToolbarSpacer/>
+				<!-- Add the Refresh button -->
+				<Button icon="sap-icon://refresh" press="onTablePersoRefresh" >
+					<layoutData>
+						<OverflowToolbarLayoutData priority="NeverOverflow" />
+					</layoutData>
+				</Button>
+				<!-- Add the Personalization button -->
+				<Button icon="sap-icon://action-settings" press="onPersoButtonPressed" >
+					<layoutData>
+						<OverflowToolbarLayoutData priority="NeverOverflow" />
+					</layoutData>
+				</Button>
+                <Button icon="sap-icon://add-contact" text="Agregar Usuario" press="onAdd" >
+					<layoutData>
+						<OverflowToolbarLayoutData priority="NeverOverflow" />
+					</layoutData>
+				</Button>
+                
+                
+
+
+
+
+			</OverflowToolbar>
+		</headerToolbar>
+		<columns>
+			<Column id="NombreUser" width="12em"><Text text="Usuario" /></Column>
+			<Column id="Nivel" minScreenWidth="Tablet" demandPopin="true"><Text text="Nivel" /></Column>
+			<Column id="TipoUser" minScreenWidth="Tablet" demandPopin="true"><Text text="Tipo" /></Column>
+            <Column width="5em"/>
+            <Column width="5em"/>
+            
+		</columns>
+		<items>
+			<ColumnListItem vAlign="Middle">
+				<cells>
+	
+                    <ObjectIdentifier title="{modeloLocalUsuarios>NombreUser}"/>
+                    <Text text="{modeloLocalUsuarios>Nivel}"/>
+                    <Text text="{modeloLocalUsuarios>TipoUser}"/>
+                    <Button text="Edit" press="onEdit"/>
+                    <Button text="Delete" press="onDelete"/>
+				</cells>
+			</ColumnListItem>
+		</items>
+	</Table>
+</mvc:View>

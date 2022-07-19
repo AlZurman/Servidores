@@ -121,6 +121,13 @@
                     "target": [
                         "TargetServidoresNombre"
                     ]
+                },
+                {
+                    "name": "Usuarios",
+                    "pattern": "Usuarios{Servidor}",
+                    "target": [
+                        "TargetUsuarios"
+                    ]
                 }
             ],
             "targets": {
@@ -136,6 +143,13 @@
                     "transition": "slide",
                     "clearControlAggregation": false,
                     "viewName": "ServidoresNombre"
+                },
+
+                "TargetUsuarios": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "clearControlAggregation": false,
+                    "viewName": "Usuarios"
                 }
             }
         },
