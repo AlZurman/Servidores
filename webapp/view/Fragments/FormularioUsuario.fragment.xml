@@ -13,19 +13,12 @@
 
         <HBox justifyContent="SpaceBetween" class="sapUiTinyMarginTopBottom sapUiSmallMarginBeginEnd">
             <Label text="Usuario"/>
-         <Input fieldGroupIds="Address" value="{AddressStreet}" id="idUsuario"></Input>
+         <Input liveChange="changeNombreUser"></Input>
         </HBox>
-
-        
-        <HBox justifyContent="SpaceBetween" class="sapUiTinyMarginTopBottom sapUiSmallMarginBeginEnd">
-            <Label text="Tipo"/>
-            <Input fieldGroupIds="Address" value="{AddressStreetNumber}" id="idTipo"></Input>
-        </HBox>
-
 
         <HBox justifyContent="SpaceBetween" class="sapUiTinyMarginTopBottom sapUiSmallMarginBeginEnd">
 	        <Label text="Tipo"/>
-            <Select id="Tipo" fieldGroupIds="Adress" selectedKey="{Tipo}">
+            <Select fieldGroupIds="Adress" width="171px" selectedKey="{Tipo}" change="changeTipoUser">
 					<items>
 						<core:Item text="Jugador" key="Jugador"/>
 						<core:Item text="Moderador" key="Moderador"/>
@@ -36,11 +29,11 @@
         <HBox class="sapUiTinyMarginTopBottom sapUiSmallMarginBeginEnd">
          <Label text="Nivel"/>
         		<Slider showAdvancedTooltip="true" inputsAsTooltips="true" value="1" width="200%"
-			min="1" max="100" enabled="{false}" class="sapUiTinyMarginBegin sapUiTinyMarginTopBottom" />
+			min="1" max="100" enabled="{= ${modeloFormularioUsuario>/TipoUser} === 'Moderador'}" class="sapUiTinyMarginBegin sapUiTinyMarginTopBottom" liveChange="changeNivel" />
         </HBox>
 
         <beginButton>
-            <Button type="Accept" text="Crear" press=".onCrearUsuario"/>
+            <Button type="Accept" text="Crear" press=".onCrearUsuario" enabled="{= ${modeloFormularioUsuario>/TipoUser} === 'Moderador'}"/>
         </beginButton>
         <endButton>
             <Button type="Reject" text="Cancelar" press="onCancelar"/>

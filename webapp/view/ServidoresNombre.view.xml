@@ -1,44 +1,64 @@
-<mvc:View controllerName="academia2022.zservidores.controller.ServidoresNombre"
-    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
-    xmlns="sap.m">
-    
-    <Page id="page" title="{i18n>title}" showHeader="false"> 
-        <content>
 
-	<Table id="idTablaServers"
-		items="{modeloLocalServidores>/}">
+<mvc:View
+    controllerName="academia2022.zservidores.controller.ServidoresNombre"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:grid="sap.ui.layout.cssgrid"
+	xmlns:f="sap.f">
 
-		<columns>
-			<Column>
-				<Text text="{i18n>NombreServer}" />
-			</Column>
-            <Column>
-				<Text text="{i18n>TipoServer}" />
-			</Column>
-            <Column>
-				<Text text="{i18n>CantUsuarios}" />
-			</Column>
-            <Column>
-				<Text text="{i18n>Estado}" />
-			</Column>
-		</columns>
-		<items>
-			<ColumnListItem vAlign="Middle" type="Navigation" press='onVerUsuarios'>
-				<cells>
-					<ObjectIdentifier
-						title="{modeloLocalServidores>NombreServer}"/>
-					<Text
-						text="{modeloLocalServidores>TipoServer}" />
-                     <Text
-						text="{modeloLocalServidores>CantUsuarios}" />
-                    <Text
-						text="{modeloLocalServidores>Estado}" />
-                                                 
-				</cells>
-			</ColumnListItem>
-		</items>
-	</Table>
+	<Panel id="panelForGridList" backgroundDesign="Translucent">
+		<headerToolbar>
+			<Toolbar height="3rem">
+				<Title text="GridList with break point S, M, L, XL" />
+			</Toolbar>
+		</headerToolbar>
 
-        </content>
-    </Page>
+		<f:GridList
+			id="gridList"
+			headerText="GridList header"
+    		class="sapUiResponsiveContentPadding">
+			<f:customLayout>
+				<grid:GridResponsiveLayout layoutChange="onLayoutChange">
+					<grid:layoutS>
+						<grid:GridSettings gridTemplateColumns="repeat(auto-fit, 8rem)" gridGap="0.25rem 0.25rem" />
+					</grid:layoutS>
+					<grid:layoutM>
+						<grid:GridSettings gridTemplateColumns="repeat(auto-fit, 12rem)" gridGap="0.5rem 0.5rem" />
+					</grid:layoutM>
+					<grid:layoutL>
+						<grid:GridSettings gridTemplateColumns="repeat(auto-fit, 16rem)" gridGap="0.75rem 0.75rem" />
+					</grid:layoutL>
+					<grid:layoutXL>
+						<grid:GridSettings gridTemplateColumns="repeat(auto-fit, 20rem)" gridGap="1rem 1rem" />
+					</grid:layoutXL>
+				</grid:GridResponsiveLayout>
+			</f:customLayout>
+
+			<f:GridListItem counter="1" type="DetailAndActive" highlight="Success">
+            
+				<VBox class="sapUiSmallMargin">
+                
+					<layoutData>
+						<FlexItemData growFactor="1" shrinkFactor="0" />
+					</layoutData>
+				
+
+					<Title class="sapUiSmallMargin" text="Peruano" wrapping="true" />
+
+
+                    <ProgressIndicator
+			            class="sapUiSmallMarginBottom sapUiSmallMargin"
+			        	percentValue="75"
+			        	displayValue="0.99GB of 1GB"
+			        	showValue="true"
+			        	state="Success" width="90%" />
+
+                    <Button  class="sapUiSmallMargin" icon="sap-icon://disconnected" text="apagar servidor" press="FUNCION" >
+			    	</Button>
+
+                </VBox>
+                
+			</f:GridListItem>
+		</f:GridList>
+	</Panel>
 </mvc:View>

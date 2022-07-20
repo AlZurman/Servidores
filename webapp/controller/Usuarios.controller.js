@@ -9,9 +9,21 @@ sap.ui.define(
         "use strict";
 
         let oServicio = '/sap/opu/odata/sap/ZOS_ACADEMIA_BRAIAN_SRV/';
+        let Servidor ;
 
         return BaseController.extend("academia2022.zservidores.controller.Usuarios", {
             onInit: function () {
+
+                this.oFormularioUsuario = new JSONModel({
+                    NombreServer: '',
+                    NombreUser: '',
+                    TipoUser: '',
+                    Nivel: 1,
+                    Completado: false
+                })
+
+                this.getView().setModel(this.oFormularioUsuario, "modeloFormularioUsuario");
+
                 this.getOwnerComponent()
                     .getRouter("object")
                     .getRoute("Usuarios")
@@ -21,7 +33,7 @@ sap.ui.define(
 
             _onObjectMatched: function (oEvent) {
 
-                let Servidor = oEvent.getParameter('arguments').Servidor;
+                Servidor = oEvent.getParameter('arguments').Servidor;
                 this._getUsuarios(Servidor)
             },
 
@@ -51,7 +63,8 @@ sap.ui.define(
 
                 if (!this.pFormularioUsuario) {
                     this.pFormularioUsuario = Fragment.load({
-                        name: "academia2022.zservidores.view.Fragments.FormularioUsuario"
+                        name: "academia2022.zservidores.view.Fragments.FormularioUsuario",
+                        controller: that
                     })
                 }
 
@@ -66,9 +79,10 @@ sap.ui.define(
 
             onCrearUsuario: function (oEvent) {
                 let oModel = this.getView().getModel();
-                let oUsuario = {};
+                let oUsuario = {}
+                
+                oUsuario.NombreServer = Servidor;
 
-                // modeloLocalUsuarios
                 oModel.create("/UsuariosSet", oUsuario, {
 
                     success: function () {
@@ -82,19 +96,12 @@ sap.ui.define(
 
             },
 
- //         onCancelar: function (oEvent) {
- //             this.pFormularioUsuario.then(function (oDialogo) {
- //                 oDialogo.close()
- //             }
- //             )
- //         },
-
-
-
-//              onCancelar: function (oEvent) {
-//                  console.log("a")
-//
-//              },
+            onCancelar: function (oEvent) {
+                this.pFormularioUsuario.then(function (oDialogo) {
+                    oDialogo.close()
+                }
+                )
+            },
 
 
             onEdit: function (oEvent) {
@@ -103,8 +110,55 @@ sap.ui.define(
             },
 
             onDelete: function (oEvent) {
-                this.getView().getModel()
+                let oModel = this.getView().getModel();
+                let oUsuario = {}
+                
+                oUsuario.NombreServer = Servidor;
 
+                oModel.delete("/UsuariosSet", oUsuario, {
+
+                    success: function () {
+
+                    },
+                    error: function (oError) {
+                        MessageToast.show("Ha ocurrido un error inesperado.")
+                    }
+
+                })
+
+            },
+
+            changeNombreUser: function (oEvent){
+                const newNombreUser = oEvent.getParameter("value")
+                oModel = this.getView().getModel("modeloFormularioUsuario")
+    
+                oModel.setProperty("/NombreUser", newNombreUser)
+            },
+
+            changeTipoUser: function (oEvent){
+                const newTipoUser = oEvent.getParameter("value")
+                oModel = this.getView().getModel("modeloFormularioUsuario")
+    
+                oModel.setProperty("/TipoUser", newTipoUser)
+            },
+
+            changeNivel: function (oEvent){
+                const newNivel = oEvent.getParameter("value")
+                oModel = this.getView().getModel("modeloFormularioUsuario")
+    
+                oModel.setProperty("/Nivel", newNivel)
+            },
+
+            _checkField: function (){
+                const oModel = this.getView().getModel("modeloFormularioUsuario").oData;
+                
+                if ( !oModel.NombreUser || !oModel.TipoUser || !oModel.Nivel){
+
+                    this.getView().getModel("modeloFormularioUsuario").setProperty("/Completado", false)
+                }
+                else {
+                    this.getView().getModel("modeloFormularioUsuario").setProperty("/Completado", true)
+                }
             }
 
         });
