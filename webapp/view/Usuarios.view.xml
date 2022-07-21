@@ -2,27 +2,78 @@
 	controllerName="academia2022.zservidores.controller.Usuarios"
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns:core="sap.ui.core"
-	xmlns="sap.m">
+	xmlns="sap.m"
+    xmlns:fb="sap.ui.comp.filterbar" >
+
+    <fb:FilterBar reset="onReset" search="onSearch" showRestoreButton="false" showClearButton="false">
+			<fb:filterGroupItems>
+				<fb:FilterGroupItem groupName="__$INTERNAL$" name="A" label="Delivery Date" partOfCurrentVariant="true" visibleInFilterBar="true">
+					<fb:control>
+						<DatePicker/>
+					</fb:control>
+				</fb:FilterGroupItem>
+
+				<fb:FilterGroupItem groupName="__$INTERNAL$" name="B" label="Tipo de usuario" labelTooltip="Tooltip Example" mandatory="true" partOfCurrentVariant="true" visibleInFilterBar="true">
+					<fb:control>
+						<ComboBox type="Text">
+							<items>
+								<core:Item text="Jugador"/>
+								<core:Item text="Moderador"/>
+							</items>
+						</ComboBox>
+					</fb:control>
+				</fb:FilterGroupItem>
+
+				<fb:FilterGroupItem groupName="G1" groupTitle="Group1" name="A1" label="Company" labelTooltip="Tooltip GroupItem Example">
+					<fb:control>
+						<Input type="Text"/>
+					</fb:control>
+				</fb:FilterGroupItem>
+
+				<fb:FilterGroupItem groupName="G1" groupTitle="Group1" name="B1" label="Customer">
+					<fb:control>
+						<Input type="Text"/>
+					</fb:control>
+				</fb:FilterGroupItem>
+
+				<fb:FilterGroupItem groupName="G2" groupTitle="Group2" name="A2" label="Supplier" labelTooltip="Tooltip GroupItem Example">
+					<fb:control>
+						<Input type="Text"/>
+					</fb:control>
+				</fb:FilterGroupItem>
+
+				<fb:FilterGroupItem groupName="G2" groupTitle="Group2" name="B2" label="Category">
+					<fb:control>
+						<Input type="Text"/>
+					</fb:control>
+				</fb:FilterGroupItem>
+			</fb:filterGroupItems>
+
+	    </fb:FilterBar>
+
+
+
 	<Table id="tablaUsuarios"
-           items="modeloLocalUsuarios" >
+           items="{modeloLocalUsuarios>/}"
+           alternateRowColors="true" >
 
 		<headerToolbar>
 			<OverflowToolbar>
-				<Title text="Products" level="H2"/>
+				<Title text="Lista de Usuarios" level="H2"/>
 				<ToolbarSpacer/>
 				<!-- Add the Refresh button -->
-				<Button icon="sap-icon://refresh" press="onTablePersoRefresh" >
+				<Button visible="false" icon="sap-icon://refresh" press="onTablePersoRefresh" >
 					<layoutData>
 						<OverflowToolbarLayoutData priority="NeverOverflow" />
 					</layoutData>
 				</Button>
 				<!-- Add the Personalization button -->
-				<Button icon="sap-icon://action-settings" press="onPersoButtonPressed" >
+				<Button visible="false" icon="sap-icon://action-settings" press="onPersoButtonPressed" >
 					<layoutData>
 						<OverflowToolbarLayoutData priority="NeverOverflow" />
 					</layoutData>
 				</Button>
-                <Button icon="sap-icon://add-contact" text="Agregar Usuario" press="onAdd" >
+                <Button type="Emphasized" icon="sap-icon://add-contact" text="Agregar Usuario" press="onAdd" >
 					<layoutData>
 						<OverflowToolbarLayoutData priority="NeverOverflow" />
 					</layoutData>
@@ -36,22 +87,25 @@
 			</OverflowToolbar>
 		</headerToolbar>
 		<columns>
-			<Column id="NombreUser" width="12em"><Text text="Usuario" /></Column>
-			<Column id="Nivel" minScreenWidth="Tablet" demandPopin="true"><Text text="Nivel" /></Column>
-			<Column id="TipoUser" minScreenWidth="Tablet" demandPopin="true"><Text text="Tipo" /></Column>
+            <Column width="25em"/>
+			<Column id="NombreUser" width="13em"> <Text text="Usuario" /> </Column>
+			<Column id="Nivel" width="8em"> <Text text="Nivel" /> </Column>
+			<Column id="TipoUser" width="50em"> <Text text="Tipo" /> </Column>
             <Column width="5em"/>
             <Column width="5em"/>
+            <Column width="25em"/>
             
 		</columns>
 		<items>
 			<ColumnListItem vAlign="Middle">
 				<cells>
 	
+                    <Text text=""/>
                     <ObjectIdentifier title="{modeloLocalUsuarios>NombreUser}"/>
                     <Text text="{modeloLocalUsuarios>Nivel}"/>
                     <Text text="{modeloLocalUsuarios>TipoUser}"/>
                     <Button text="Edit" press="onEdit"/>
-                    <Button text="Delete" press="onDelete"/>
+                    <Button type="Reject" text="Delete" press="onDelete"/>
 				</cells>
 			</ColumnListItem>
 		</items>

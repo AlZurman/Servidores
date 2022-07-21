@@ -9,7 +9,7 @@ sap.ui.define(
         "use strict";
 
         let oServicio = '/sap/opu/odata/sap/ZOS_ACADEMIA_BRAIAN_SRV/';
-        let Servidor ;
+        let Servidor;
 
         return BaseController.extend("academia2022.zservidores.controller.Usuarios", {
             onInit: function () {
@@ -17,7 +17,7 @@ sap.ui.define(
                 this.oFormularioUsuario = new JSONModel({
                     NombreServer: '',
                     NombreUser: '',
-                    TipoUser: '',
+                    TipoUser: 'Jugador',
                     Nivel: 1,
                     Completado: false
                 })
@@ -80,12 +80,23 @@ sap.ui.define(
             onCrearUsuario: function (oEvent) {
                 let oModel = this.getView().getModel();
                 let oUsuario = {}
-                
+                let that = this
+
+                const modeloFormularioUsuario = this.getView().getModel("modeloFormularioUsuario").oData;
+
                 oUsuario.NombreServer = Servidor;
+                oUsuario.NombreUser = modeloFormularioUsuario.NombreUser;
+                oUsuario.TipoUser = modeloFormularioUsuario.TipoUser;
+                oUsuario.Nivel = modeloFormularioUsuario.Nivel;
 
                 oModel.create("/UsuariosSet", oUsuario, {
 
                     success: function () {
+
+                        that.pFormularioUsuario.then(function (oDialogo) {
+                            oDialogo.close()
+                        })
+                        that._getUsuarios(Servidor)
 
                     },
                     error: function (oError) {
@@ -110,14 +121,21 @@ sap.ui.define(
             },
 
             onDelete: function (oEvent) {
+
                 let oModel = this.getView().getModel();
                 let oUsuario = {}
+                let that = this
+                let modeloLocalUsuarios = this.getView().getModel();
                 
-                oUsuario.NombreServer = Servidor;
 
-                oModel.delete("/UsuariosSet", oUsuario, {
+                oUsuario.NombreServer = Servidor;
+                oUsuario.NombreUser = oEvent.getSource().getBindingContext("modeloLocalUsuarios").getProperty("NombreUser");
+
+                oModel.remove("/UsuariosSet(NombreServer='"+ oUsuario.NombreServer +"',NombreUser='"+ oUsuario.NombreUser +"')", {
 
                     success: function () {
+
+                        that._getUsuarios(Servidor)
 
                     },
                     error: function (oError) {
@@ -128,31 +146,34 @@ sap.ui.define(
 
             },
 
-            changeNombreUser: function (oEvent){
+            changeNombreUser: function (oEvent) {
                 const newNombreUser = oEvent.getParameter("value")
-                oModel = this.getView().getModel("modeloFormularioUsuario")
-    
+                let oModel = this.getView().getModel("modeloFormularioUsuario")
+
                 oModel.setProperty("/NombreUser", newNombreUser)
+
+                this._checkField()
+
             },
 
-            changeTipoUser: function (oEvent){
-                const newTipoUser = oEvent.getParameter("value")
-                oModel = this.getView().getModel("modeloFormularioUsuario")
-    
+            changeTipoUser: function (oEvent) {
+                const newTipoUser = oEvent.getParameters().selectedItem.mProperties.text
+                let oModel = this.getView().getModel("modeloFormularioUsuario")
+
                 oModel.setProperty("/TipoUser", newTipoUser)
             },
 
-            changeNivel: function (oEvent){
+            changeNivel: function (oEvent) {
                 const newNivel = oEvent.getParameter("value")
-                oModel = this.getView().getModel("modeloFormularioUsuario")
-    
+                let oModel = this.getView().getModel("modeloFormularioUsuario")
+
                 oModel.setProperty("/Nivel", newNivel)
             },
 
-            _checkField: function (){
+            _checkField: function () {
                 const oModel = this.getView().getModel("modeloFormularioUsuario").oData;
-                
-                if ( !oModel.NombreUser || !oModel.TipoUser || !oModel.Nivel){
+
+                if (!oModel.NombreUser) {
 
                     this.getView().getModel("modeloFormularioUsuario").setProperty("/Completado", false)
                 }

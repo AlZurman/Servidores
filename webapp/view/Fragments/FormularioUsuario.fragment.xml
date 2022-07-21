@@ -33,7 +33,7 @@
         </HBox>
 
         <beginButton>
-            <Button type="Accept" text="Crear" press=".onCrearUsuario" enabled="{= ${modeloFormularioUsuario>/TipoUser} === 'Moderador'}"/>
+            <Button type="Accept" text="Crear" press=".onCrearUsuario" enabled="{= ${modeloFormularioUsuario>/Completado}}"/>
         </beginButton>
         <endButton>
             <Button type="Reject" text="Cancelar" press="onCancelar"/>

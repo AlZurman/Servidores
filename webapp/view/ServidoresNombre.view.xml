@@ -6,7 +6,7 @@
 	xmlns:grid="sap.ui.layout.cssgrid"
 	xmlns:f="sap.f">
 
-	<Panel id="panelForGridList" backgroundDesign="Translucent">
+	<Panel id="idTablaServers" backgroundDesign="Translucent">
 		<headerToolbar>
 			<Toolbar height="3rem">
 				<Title text="GridList with break point S, M, L, XL" />
@@ -14,7 +14,8 @@
 		</headerToolbar>
 
 		<f:GridList
-			id="gridList"
+			id="GridList"
+            items="{modeloLocalServidores>/}"
 			headerText="GridList header"
     		class="sapUiResponsiveContentPadding">
 			<f:customLayout>
@@ -34,7 +35,7 @@
 				</grid:GridResponsiveLayout>
 			</f:customLayout>
 
-			<f:GridListItem counter="1" type="DetailAndActive" highlight="Success">
+			<f:GridListItem press='onVerUsuarios' counter="{modeloLocalServidores>CantUsuarios}" type="DetailAndActive" highlight="{path: 'Estado', formatter: '.formatter.formatterEstadoGrid'}">
             
 				<VBox class="sapUiSmallMargin">
                 
@@ -43,8 +44,8 @@
 					</layoutData>
 				
 
-					<Title class="sapUiSmallMargin" text="Peruano" wrapping="true" />
-
+					<Title class="sapUiSmallMargin" text="{modeloLocalServidores>NombreServer}" wrapping="true" />
+                	<Label class="sapUiSmallMargin" text="{modeloLocalServidores>TipoServer}" wrapping="true" />
 
                     <ProgressIndicator
 			            class="sapUiSmallMarginBottom sapUiSmallMargin"
@@ -53,7 +54,7 @@
 			        	showValue="true"
 			        	state="Success" width="90%" />
 
-                    <Button  class="sapUiSmallMargin" icon="sap-icon://disconnected" text="apagar servidor" press="FUNCION" >
+                    <Button type="{path: 'Estado', formatter: '.formatter.formatterEstadoBottonTipo'}"  class="sapUiSmallMargin" icon="{path: 'Estado', formatter: '.formatter.formatterEstadoBottonIcono'}" text="{path: 'Estado', formatter: '.formatter.formatterEstadoBotonTexto'}" press="" >
 			    	</Button>
 
                 </VBox>

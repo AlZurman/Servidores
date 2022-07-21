@@ -1,12 +1,14 @@
 sap.ui.define(
     [
         "sap/ui/core/mvc/Controller",
-        "sap/ui/model/json/JSONModel"
+        "sap/ui/model/json/JSONModel",
+        "academia2022/zservidores/model/formatter", 
     ],
-    function (BaseController, JSONModel) {
+    function (BaseController, JSONModel, formatter) {
         "use strict";
 
         return BaseController.extend("academia2022.zservidores.controller.ServidoresNombre", {
+            formatter: formatter,
             onInit: function () {
                 this.getOwnerComponent()
                     .getRouter("object")
