@@ -1,0 +1,31 @@
+<core:FragmentDefinition 
+    xmlns="sap.m" 
+    xmlns:core="sap.ui.core" 
+    xmlns:mvc="sap.ui.core.mvc" 
+    xmlns:html="http://www.w3.org/1999/xhtml"
+    xmlns:l="sap.ui.layout" 
+    xmlns:f="sap.ui.layout.form"
+    xmlns:tnt="sap.tnt" 
+    xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+
+
+        <Dialog title="Editar Servidor">
+
+        <HBox justifyContent="SpaceBetween" class="sapUiTinyMarginTopBottom sapUiSmallMarginBeginEnd">
+	        <Label text="Tipo de Servidor"/>
+            <Select fieldGroupIds="Adress" width="171px" selectedKey="{Tipo}" change="changeTipoUser">
+					<items>
+						<core:Item text="Público" key="Público"/>
+						<core:Item text="Privado" key="Privado"/>
+					</items>
+				</Select>
+        </HBox>
+
+        <beginButton>
+            <Button type="Accept" text="Aceptar" press=".onCrearUsuario" enabled="{= ${modeloFormularioUsuario>/Completado}}"/>
+        </beginButton>
+        <endButton>
+            <Button type="Reject" text="Cancelar" press="onCancelar"/>
+        </endButton>
+        </Dialog>
+</core:FragmentDefinition>

@@ -35,7 +35,7 @@
 				</grid:GridResponsiveLayout>
 			</f:customLayout>
 
-			<f:GridListItem press='onVerUsuarios' counter="{modeloLocalServidores>CantUsuarios}" type="DetailAndActive" highlight="{path: 'Estado', formatter: '.formatter.formatterEstadoGrid'}">
+			<f:GridListItem press='onVerUsuarios' counter="{modeloLocalServidores>CantUsuarios}" type="DetailAndActive" highlight="{path: 'modeloLocalServidores>Estado', formatter: '.formatter.formatterEstadoGrid'}">
             
 				<VBox class="sapUiSmallMargin">
                 
@@ -45,7 +45,7 @@
 				
 
 					<Title class="sapUiSmallMargin" text="{modeloLocalServidores>NombreServer}" wrapping="true" />
-                	<Label class="sapUiSmallMargin" text="{modeloLocalServidores>TipoServer}" wrapping="true" />
+                	<Label class="sapUiSmallMargin" text="{path: 'modeloLocalServidores>TipoServer', formatter: '.formatter.formatterTipoSv'}" wrapping="true" />
 
                     <ProgressIndicator
 			            class="sapUiSmallMarginBottom sapUiSmallMargin"
@@ -54,7 +54,7 @@
 			        	showValue="true"
 			        	state="Success" width="90%" />
 
-                    <Button type="{path: 'Estado', formatter: '.formatter.formatterEstadoBottonTipo'}"  class="sapUiSmallMargin" icon="{path: 'Estado', formatter: '.formatter.formatterEstadoBottonIcono'}" text="{path: 'Estado', formatter: '.formatter.formatterEstadoBotonTexto'}" press="" >
+                    <Button type="{path: 'modeloLocalServidores>Estado', formatter: '.formatter.formatterEstadoBotonTipo'}"  class="sapUiSmallMargin" icon="{path: 'modeloLocalServidores>Estado', formatter: '.formatter.formatterEstadoBotonIcono'}" text="{path: 'modeloLocalServidores>Estado', formatter: '.formatter.formatterEstadoBotonTexto'}" press="onActualizarServidor" >
 			    	</Button>
 
                 </VBox>

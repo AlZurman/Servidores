@@ -3,35 +3,59 @@ sap.ui.define([], function () {
 
     return {
 
-        formatterEstadoGrid: function (EstadoGrid) {
+        formatterEstadoGrid: function (Estado) {
 
-            if (Estado == "Encendido") return "Success";
+            if (Estado == "ENCENDIDO") return "Success";
 
-            if (Estado == "Apagado") return "Warning";
-
-        },
-
-        formatterEstadoBotonIcono: function (EstadoBoton) {
-
-            if (Estado == "Encendido") return "sap-icon://disconnected";
-
-            if (Estado == "Apagado") return "sap-icon://connected";
+            if (Estado == "APAGADO") return "Warning";
 
         },
 
-        formatterEstadoBotonTexto: function (EstadoTexto) {
+        formatterEstadoBotonIcono: function (Estado) {
 
-            if (Estado == "Encendido") return "apagar servidor";
+            if (Estado == "ENCENDIDO") return "sap-icon://disconnected";
 
-            if (Estado == "Apagado") return "encender servidor";
+            if (Estado == "APAGADO") return "sap-icon://connected";
 
         },
 
-        formatterEstadoBotonTipo: function (EstadoTipo) {
+        formatterEstadoBotonTexto: function (Estado) {
 
-            if (Estado == "Encendido") return "Reject";
+            if (Estado == "ENCENDIDO") return "apagar servidor";
 
-            if (Estado == "Apagado") return "Accept";
+            if (Estado == "APAGADO") return "encender servidor";
+
+        },
+
+        formatterEstadoBotonTipo: function (Estado) {
+
+            if (Estado == "ENCENDIDO") return "Reject";
+
+            if (Estado == "APAGADO") return "Accept";
+
+        },
+
+        formatterUsuarioIcono: function (Tipo) {
+
+            if (Tipo == "Jugador") return "sap-icon://person-placeholder";
+
+            if (Tipo == "Moderador") return "sap-icon://shield";
+
+        },
+
+        formatterUsuarioColor: function (Tipo) {
+
+            if (Tipo == "Jugador") return "blue";
+
+            if (Tipo == "Moderador") return "green";
+
+        },
+
+        formatterTipoSv: function (TipoSv) {
+
+            if (TipoSv == "PÚBLICO") return "Servidor Público";
+
+            if (TipoSv == "PRIVADO") return "Servidor Privado";
 
         },
 

@@ -15,12 +15,12 @@
 
 				<fb:FilterGroupItem groupName="__$INTERNAL$" name="B" label="Tipo de usuario" labelTooltip="Tooltip Example" mandatory="true" partOfCurrentVariant="true" visibleInFilterBar="true">
 					<fb:control>
-						<ComboBox type="Text">
+						<Select>
 							<items>
 								<core:Item text="Jugador"/>
 								<core:Item text="Moderador"/>
 							</items>
-						</ComboBox>
+						</Select>
 					</fb:control>
 				</fb:FilterGroupItem>
 
@@ -55,7 +55,7 @@
 
 	<Table id="tablaUsuarios"
            items="{modeloLocalUsuarios>/}"
-           alternateRowColors="true" >
+           alternateRowColors="true" class="sapUiResponsiveContentPadding, sapUiSmallMarginBottom" >
 
 		<headerToolbar>
 			<OverflowToolbar>
@@ -88,6 +88,7 @@
 		</headerToolbar>
 		<columns>
             <Column width="25em"/>
+            <Column width="3em"/>
 			<Column id="NombreUser" width="13em"> <Text text="Usuario" /> </Column>
 			<Column id="Nivel" width="8em"> <Text text="Nivel" /> </Column>
 			<Column id="TipoUser" width="50em"> <Text text="Tipo" /> </Column>
@@ -99,13 +100,15 @@
 		<items>
 			<ColumnListItem vAlign="Middle">
 				<cells>
-	
-                    <Text text=""/>
+
+                    <Text text="" />
+                    <core:Icon color="{path: 'modeloLocalUsuarios>TipoUser', formatter: '.formatter.formatterUsuarioColor'}" src="{path: 'modeloLocalUsuarios>TipoUser', formatter: '.formatter.formatterUsuarioIcono'}" />
                     <ObjectIdentifier title="{modeloLocalUsuarios>NombreUser}"/>
                     <Text text="{modeloLocalUsuarios>Nivel}"/>
                     <Text text="{modeloLocalUsuarios>TipoUser}"/>
                     <Button text="Edit" press="onEdit"/>
-                    <Button type="Reject" text="Delete" press="onDelete"/>
+                    <Button type="Reject" icon="sap-icon://delete" press="onDelete"/>
+
 				</cells>
 			</ColumnListItem>
 		</items>

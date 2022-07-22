@@ -3,15 +3,19 @@ sap.ui.define(
         "sap/ui/core/mvc/Controller",
         "sap/ui/model/json/JSONModel",
         "sap/m/MessageToast",
-        "sap/ui/core/Fragment"
+        "sap/ui/core/Fragment",
+        "academia2022/zservidores/model/formatter",
+
     ],
-    function (BaseController, JSONModel, MessageToast, Fragment) {
+
+    function (BaseController, JSONModel, MessageToast, Fragment, formatter) {
         "use strict";
 
         let oServicio = '/sap/opu/odata/sap/ZOS_ACADEMIA_BRAIAN_SRV/';
         let Servidor;
 
         return BaseController.extend("academia2022.zservidores.controller.Usuarios", {
+            formatter: formatter,
             onInit: function () {
 
                 this.oFormularioUsuario = new JSONModel({
@@ -92,6 +96,8 @@ sap.ui.define(
                 oModel.create("/UsuariosSet", oUsuario, {
 
                     success: function () {
+
+                        MessageToast.show("Usuario creado con éxito")
 
                         that.pFormularioUsuario.then(function (oDialogo) {
                             oDialogo.close()
