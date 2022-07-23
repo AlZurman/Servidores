@@ -33,6 +33,21 @@ sap.ui.define(
                     .getRoute("Usuarios")
                     .attachPatternMatched(this._onObjectMatched, this);
 
+                    this.oEditarUsuario = new JSONModel({
+                        NombreServer: '',
+                        NombreUser: '',
+                        TipoUser: '',
+                        Nivel: 1,
+                        Completado: false
+                    })
+    
+                    this.getView().setModel(this.oEditarUsuario, "EditarUsuario");
+    
+                    this.getOwnerComponent()
+                        .getRouter("object")
+                        .getRoute("Usuarios")
+                        .attachPatternMatched(this._onObjectMatched, this);
+
             },
 
             _onObjectMatched: function (oEvent) {
@@ -114,10 +129,17 @@ sap.ui.define(
             },
 
             onCancelar: function (oEvent) {
+
+                let modeloFormularioUsuario = this.getView().getModel("modeloFormularioUsuario")
+
                 this.pFormularioUsuario.then(function (oDialogo) {
                     oDialogo.close()
                 }
                 )
+
+
+
+
             },
 
 
@@ -186,7 +208,101 @@ sap.ui.define(
                 else {
                     this.getView().getModel("modeloFormularioUsuario").setProperty("/Completado", true)
                 }
-            }
+            },
+
+
+            EditarUsuarioFragment: function () {
+
+                let that = this             
+
+                const EditarUsuarioNombreServer = oEvent.getSource().getBindingContext('modeloLocalUsuarios').getProperty('NombreServer');
+
+                const EditarUsuarioNombreUser = oEvent.getSource().getBindingContext('modeloLocalUsuarios').getProperty('NombreUser');
+
+                let oModel = this.getView().getModel("EditarUsuario")
+
+                oModel.setProperty("/NombreServer", EditarUsuarioNombreServer)
+                oModel.setProperty("/NombreUser", EditarUsuarioNombreUser)
+
+                if (!this.pEditarUsuario) {
+                    this.pEditarUsuario = Fragment.load({
+                        name: "academia2022.zservidores.view.Fragments.EditarUsuario",
+                        controller: that
+                    })
+                }
+
+                this.pEditarUsuario.then(function (oDialogo) {
+
+                    that.getView().addDependent(oDialogo)
+                    oDialogo.open()
+
+                })
+
+            },
+
+            onCancelarEdit: function (oEvent) {
+
+                let modeloEditarUsuario = this.getView().getModel("modeloEditarUsuario")
+
+                this.pEditarUsuario.then(function (oDialogo) {
+                    oDialogo.close()
+                })
+
+            },
+
+            onEditarUsuario: function (oEvent) {
+                let oModel = this.getView().getModel();
+                let oUsuarioEditado = {}
+                let that = this
+
+                const EditarUsuario = this.getView().getModel("EditarUsuario").oData;
+
+                oUsuarioEditado.NombreServer = Servidor;
+                oUsuarioEditado.NombreUser = EditarUsuario.NombreUser;
+                oUsuarioEditado.TipoUser = EditarUsuario.TipoUser;
+                oUsuarioEditado.Nivel = EditarUsuario.Nivel;
+
+                oModel.update("/UsuariosSet(NombreServer='"+ EditarUsuarioNombreServer +"',NombreUser='"+ EditarUsuarioNombreUser +"')", {
+
+                    success: function () {
+
+                        MessageToast.show("Usuario editado con éxito")
+
+                        that.pEditarUsuario.then(function (oDialogo) {
+                            oDialogo.close()
+                        })
+                        that._getUsuarios(Servidor)
+
+                    },
+                    error: function (oError) {
+                        MessageToast.show("Ha ocurrido un error inesperado.")
+                    }
+
+                })
+
+            },
+
+            changeNombreUser: function (oEvent) {
+                const newNombreUser = oEvent.getParameter("value")
+                let oModel = this.getView().getModel("EditarUsuario")
+
+                oModel.setProperty("/NombreUser", newNombreUser)
+
+            },
+
+            changeTipoUser: function (oEvent) {
+                const newTipoUser = oEvent.getParameters().selectedItem.mProperties.text
+                let oModel = this.getView().getModel("EditarUsuario")
+
+                oModel.setProperty("/TipoUser", newTipoUser)
+            },
+
+            changeNivel: function (oEvent) {
+                const newNivel = oEvent.getParameter("value")
+                let oModel = this.getView().getModel("EditarUsuario")
+
+                oModel.setProperty("/Nivel", newNivel)
+            },
 
         });
 

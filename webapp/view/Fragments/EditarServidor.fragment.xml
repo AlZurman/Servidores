@@ -22,7 +22,7 @@
         </HBox>
 
         <beginButton>
-            <Button type="Accept" text="Aceptar" press=".onCrearUsuario" enabled="{= ${modeloFormularioUsuario>/Completado}}"/>
+            <Button type="Accept" text="Aceptar" press=".on" enabled="{= ${modeloFormularioUsuario>/Completado}}"/>
         </beginButton>
         <endButton>
             <Button type="Reject" text="Cancelar" press="onCancelar"/>

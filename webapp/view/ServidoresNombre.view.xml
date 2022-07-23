@@ -49,10 +49,10 @@
 
                     <ProgressIndicator
 			            class="sapUiSmallMarginBottom sapUiSmallMargin"
-			        	percentValue="75"
-			        	displayValue="0.99GB of 1GB"
+			        	percentValue="100"
+			        	displayValue="Servidor Apagado"
 			        	showValue="true"
-			        	state="Success" width="90%" />
+			        	state="Warning" width="90%" />
 
                     <Button type="{path: 'modeloLocalServidores>Estado', formatter: '.formatter.formatterEstadoBotonTipo'}"  class="sapUiSmallMargin" icon="{path: 'modeloLocalServidores>Estado', formatter: '.formatter.formatterEstadoBotonIcono'}" text="{path: 'modeloLocalServidores>Estado', formatter: '.formatter.formatterEstadoBotonTexto'}" press="onActualizarServidor" >
 			    	</Button>

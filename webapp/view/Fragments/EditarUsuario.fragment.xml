@@ -9,7 +9,7 @@
     xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
 
 
-        <Dialog title="Nuevo Usuario">
+        <Dialog title="Editar Usuario">
 
         <HBox justifyContent="SpaceBetween" class="sapUiTinyMarginTopBottom sapUiSmallMarginBeginEnd">
             <Label text="Usuario"/>
@@ -29,14 +29,14 @@
         <HBox class="sapUiTinyMarginTopBottom sapUiSmallMarginBeginEnd">
          <Label text="Nivel"/>
         		<Slider showAdvancedTooltip="true" inputsAsTooltips="true" value="1" width="200%"
-			min="1" max="100" enabled="{= ${modeloFormularioUsuario>/TipoUser} === 'Moderador'}" class="sapUiTinyMarginBegin sapUiTinyMarginTopBottom" liveChange="changeNivel" />
+			min="1" max="100" enabled="{= ${EditarUsuario>/TipoUser} === 'Moderador'}" class="sapUiTinyMarginBegin sapUiTinyMarginTopBottom" liveChange="changeNivel" />
         </HBox>
 
         <beginButton>
-            <Button type="Accept" text="Crear" press=".onCrearUsuario" enabled="{= ${modeloFormularioUsuario>/Completado}}"/>
+            <Button type="Accept" text="Editar" press=".onEditarUsuario" />
         </beginButton>
         <endButton>
-            <Button type="Reject" text="Cancelar" press="onCancelar"/>
+            <Button type="Reject" text="Cancelar" press="onCancelarEdit"/>
         </endButton>
         </Dialog>
 </core:FragmentDefinition>
