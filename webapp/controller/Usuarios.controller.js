@@ -211,9 +211,9 @@ sap.ui.define(
             },
 
 
-            EditarUsuarioFragment: function () {
+            EditarUsuarioFragment: function (oEvent) {
 
-                let that = this             
+                let that = this   
 
                 const EditarUsuarioNombreServer = oEvent.getSource().getBindingContext('modeloLocalUsuarios').getProperty('NombreServer');
 
@@ -262,7 +262,7 @@ sap.ui.define(
                 oUsuarioEditado.TipoUser = EditarUsuario.TipoUser;
                 oUsuarioEditado.Nivel = EditarUsuario.Nivel;
 
-                oModel.update("/UsuariosSet(NombreServer='"+ EditarUsuarioNombreServer +"',NombreUser='"+ EditarUsuarioNombreUser +"')", {
+                oModel.update("/UsuariosSet(NombreServer='"+ oUsuarioEditado.NombreServer +"',NombreUser='"+ oUsuarioEditado.NombreUser +"')", oUsuarioEditado, {
 
                     success: function () {
 

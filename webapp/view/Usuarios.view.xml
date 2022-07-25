@@ -4,63 +4,7 @@
 	xmlns:core="sap.ui.core"
 	xmlns="sap.m"
     xmlns:fb="sap.ui.comp.filterbar" >
-
-<VBox >
-    <fb:FilterBar reset="onReset" search="onSearch" showRestoreButton="true" showClearButton="true">
-			<fb:filterGroupItems>
-				<fb:FilterGroupItem groupName="__$INTERNAL$" name="A" label="Usuario" mandatory="true" partOfCurrentVariant="true" visibleInFilterBar="true">
-					<fb:control>
-						<Input/>
-					</fb:control>
-				</fb:FilterGroupItem>
-
-				<fb:FilterGroupItem groupName="__$INTERNAL$" name="B" label="Tipo de usuario" labelTooltip="Tooltip Example" mandatory="true" partOfCurrentVariant="true" visibleInFilterBar="true">
-					<fb:control>
-						<ComboBox items="{/UsuariosSet}" >
-                            <core:Item key="{TipoUser}" text="{TipoUser}" />
-						</ComboBox>
-					</fb:control>
-				</fb:FilterGroupItem>
-
-				<fb:FilterGroupItem groupName="__$INTERNAL$" name="C" label="Nivel" labelTooltip="Tooltip Example" mandatory="true" partOfCurrentVariant="true" visibleInFilterBar="true">
-					<fb:control>
-						<ComboBox selectedKey="{a}" items="{a}" >
-                            <core:Item key="{a}" text="{a}" />
-						</ComboBox>
-					</fb:control>
-				</fb:FilterGroupItem>
-
-
-
-				<fb:FilterGroupItem groupName="G1" groupTitle="Group1" name="A1" label="Company" labelTooltip="Tooltip GroupItem Example">
-					<fb:control>
-						<Input type="Text"/>
-					</fb:control>
-				</fb:FilterGroupItem>
-
-				<fb:FilterGroupItem groupName="G1" groupTitle="Group1" name="B1" label="Customer">
-					<fb:control>
-						<Input type="Text"/>
-					</fb:control>
-				</fb:FilterGroupItem>
-
-				<fb:FilterGroupItem groupName="G2" groupTitle="Group2" name="A2" label="Supplier" labelTooltip="Tooltip GroupItem Example">
-					<fb:control>
-						<Input type="Text"/>
-					</fb:control>
-				</fb:FilterGroupItem>
-
-				<fb:FilterGroupItem groupName="G2" groupTitle="Group2" name="B2" label="Category">
-					<fb:control>
-						<Input type="Text"/>
-					</fb:control>
-				</fb:FilterGroupItem>
-			</fb:filterGroupItems>
-
-	    </fb:FilterBar>
-</VBox>
-
-
+    
 	<Table id="tablaUsuarios"
            items="{modeloLocalUsuarios>/}"
            alternateRowColors="true" class="sapUiResponsiveContentPadding, sapUiSmallMarginBottom" >
